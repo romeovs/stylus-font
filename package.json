@@ -7,8 +7,12 @@
     "prepublish": "npm run compile",
     "compile": "babel -Dd build/ src/"
   },
-  "author": "",
+  "author": "Romeo Van Snick",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/romeovs/browserify-gulp.git"
+  },
   "devDependencies": {
     "PrettyCSS": "^0.3.11",
     "babel-preset-all": "github:romeovs/babel-preset-all"
