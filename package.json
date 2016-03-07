@@ -1,0 +1,19 @@
+{
+  "name": "stylus-font",
+  "version": "0.0.1",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "prepublish": "npm run compile",
+    "compile": "babel -Dd build/ src/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "PrettyCSS": "^0.3.11",
+    "babel-preset-all": "github:romeovs/babel-preset-all"
+  },
+  "dependencies": {
+    "mime": "^1.3.4"
+  }
+}
