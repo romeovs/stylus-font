@@ -3,7 +3,7 @@
 This is by far the laziest way to add a font-face to your stylus files:
 
 ```stylus
-font(Derp, bold, italic, 'derp.ttf', 'darp.woff', 'smoo.eot?iefix', 'data:font/truetype;base65,dope')
+font(Derp, bold, italic, 'derp.ttf', url('darp.woff'), local('Snook'), 'smoo.eot', 'data:font/truetype;base65,dope')
 ```
 
 turns into:
@@ -13,8 +13,18 @@ turns into:
   font-family: Derp;
   font-weight: bold;
   font-style: italic;
-  src: url("derp.ttf");
-  src: local('☺'), url(smoo.eot?iefix) format(embedded-opentype),
+  src: url("smoo.eot");
+  src: local('☺'), local('Snook'), url(smoo.eot) format(embedded-opentype),
+       url(darp.woff) format(woff), url(data:font/truetype;base65,dope) format(truetype),
+       url(derp.ttf) format(truetype);
+}
+
+@font-face {
+  font-family: Derp;
+  font-weight: bold;
+  font-style: italic;
+  src: url("smoo.eot");
+  src: url(smoo.eot?iefix) format(embedded-opentype),
        url(darp.woff) format(woff), url(data:font/truetype;base65,dope) format(truetype),
        url(derp.ttf) format(truetype);
 }
@@ -58,11 +68,19 @@ font(Blorp, thin, normal, 'meh.ttf', 'argh.woff')
 The signature is very hard to get wrong:
 
 ```
-font(<name>, <weight>, <style>, <uri>, [<uri>, [<uri>, ...]])
+font(<name>, [<weight>], [<style>], <uri>, [<uri>, [<uri>, ...]])
+```
+`<style>` and `<weight>` are optional and interchangeable. A uri can be anything
+of the form:
+```
+"foo.ttf"
+"data:font/truetype;base64,xweow..."
+url("foo.ttf") // quotes are nexessary!
+local("Dope") // quotes are nexessary!
 ```
 
 # ToDo:
 
 - Write tests! Imma QuickCheck the heck out of this.
-- Make weight and style optional and interchangable.
 - Test if it is better to but data uri's at the front of the `src` stack or not.
+- Allow omitting quotes in `url` and `local`
