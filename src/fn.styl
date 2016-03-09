@@ -4,4 +4,4 @@ font(name, weight = normal, style = normal, names...)
     font-weight weight
     font-style  style
     src url(names[0])
-    src local('☺'), mksrc(names)
+    src local('☺'), unquote(mksrc(names))

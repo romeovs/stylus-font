@@ -74,9 +74,9 @@ const font = function(...uris) {
   })
 
   const urls =
-    sorted.map(el => `url(${el.uri}) format(${el.format})`)
+    sorted.map(el => `url(${JSON.stringify(el.uri)}) format(${el.format})`)
 
-  return new stylus.nodes.Literal(urls.join(', '));
+  return urls.join(', ');
 }
 
 const ok = function (style) {
