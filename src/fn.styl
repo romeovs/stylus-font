@@ -1,7 +1,26 @@
-font(name, weight = normal, style = normal, names...)
+font(name, names...)
+  $res = mksrc(names)
+  $w   = unquote($res.weight)
+  $s   = unquote($res.style)
+  $src = unquote($res.src)
+  $fst = unquote($res.first)
+  $nlo = unquote($res.nolocal)
   @font-face
     font-family name
-    font-weight weight
-    font-style  style
-    src url(names[0])
-    src local('☺'), unquote(mksrc(names))
+    font-weight $w
+    font-style  $s
+    // ie fallback
+    src $fst
+    // canonical version, with a smile to stop old IE
+    src local('☺︎') $src
+
+  @font-face
+    font-family name
+    font-weight $w
+    font-style  $s
+    // ie fallback
+    src $fst
+
+    // fallback for browsers that do not support local
+    src $nlo
+
